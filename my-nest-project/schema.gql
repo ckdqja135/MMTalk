@@ -1,0 +1,54 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserEntity {
+  seq: Float!
+  nickname: String!
+  dueDate: String!
+  currentPregnancyWeek: Float
+}
+
+type ChecklistEntity {
+  id: Int!
+  weekNumber: Float!
+  content: String!
+  completed: Boolean!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  getChecklistByWeek(weekNumber: Float!, pageSize: Float!, currentPage: Float!): [ChecklistEntity!]!
+  users: [UserEntity!]!
+  currentUserInfo: UserEntity
+}
+
+type Mutation {
+  updateChecklistItemStatus(id: Float!, completed: Boolean!): ChecklistEntity!
+  createChecklistItem(input: ChecklistInput!): ChecklistEntity!
+  undoDeleteChecklistItem(id: Int!): [ChecklistEntity!]!
+  deleteChecklistItem(id: Int!): ChecklistEntity!
+  updateChecklistItem(id: Int!, updatedData: UpdateChecklistItemInput!): ChecklistEntity!
+  updateUserInfo(input: UpdateUserInput!): UserEntity!
+}
+
+input ChecklistInput {
+  weekNumber: Float!
+  content: String!
+}
+
+input UpdateChecklistItemInput {
+  weekNumber: Int
+  content: String
+}
+
+input UpdateUserInput {
+  userSeq: Int!
+  nickname: String
+  dueDate: String
+}

@@ -1,0 +1,18 @@
+type Mutation {
+  createChecklistItem(input: ChecklistInput): ChecklistEntity
+  undoDeleteChecklistItem(id: Int!): [ChecklistEntity] # 혹은 단일 항목을 리턴하도록 변경 가능
+  deleteChecklistItem(id: Int!): ChecklistEntity
+}
+
+input ChecklistInput {
+  weekNumber: Int!
+  content: String!
+}
+
+type ChecklistEntity {
+  id: Int!
+  weekNumber: Int!
+  content: String!
+  completed: Boolean!
+  createdAt: Date!
+}
